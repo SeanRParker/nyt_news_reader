@@ -2,11 +2,11 @@
   <div id="news-feed" >
     <h1 class="text-center text-2xl py-4">newsFeed</h1>
     <!-- <div v-for="story in this.articles" :key="story"> -->
-    <div v-for="(story, ind) in this.articles" :key="ind" class="shadow-lg rounded-lg bg-white p-6 mb-6">
-      <img class="pr-2 pb-2 inline-block w-1/5" :src=story.thumbnail_standard />
-      <div class="inline-block w-4/5">
-        <p>{{formatDate(story.published_date)}}</p>
-        <p><a :href="story.url" target="_blank">{{story.title}}</a></p>
+    <div v-for="(story, ind) in this.articles" :key="ind" class="shadow-lg rounded-lg bg-white gap-1.5 p-6 sm:w-full md:w-1/2 xl:w-1/3 inline-block align-top">
+      <img class="pb-4 inline-block w-1/5 pt-1.5 align-top" :src=story.thumbnail_standard />
+      <div class="pl-2 inline-block w-4/5">
+        <p class="text-lg"><a :href="story.url" target="_blank">{{story.title}}</a></p>
+        <p class="text-sm py-2">{{formatDate(story.published_date)}}</p>
       </div>
       <p class>{{story.abstract}}</p>
     </div>
