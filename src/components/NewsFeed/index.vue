@@ -15,7 +15,7 @@ export default {
     return {
       BASE_URL: "https://api.nytimes.com/svc/news/v3/content/",
       apiKey: "42E7VHsQarerg6mapRfsNc4hwcWmP3QH",
-      articles: ['one', 'two', 'three', 'four', 'five']
+      articles: []
     };
   },
   methods: {
