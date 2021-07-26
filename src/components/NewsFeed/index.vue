@@ -10,8 +10,9 @@
       </div>
       <p class>{{story.abstract}}</p>
     </div>
-    <div id="footer">
+    <div id="footer" class="sticky bottom-0 bg-white">
       <!-- <a v-for="{section, action} in sections" @click="action">{{section}}</a> -->
+      <button v-for="(section, i) in sections" :key="i" @click="loadArticles(section)" class="inline-block w-1/4 py-4">{{section}}</button>
     </div>
   </div>
 </template>
@@ -24,7 +25,7 @@ export default {
       BASE_URL: "https://api.nytimes.com/svc/news/v3/content/",
       apiKey: "42E7VHsQarerg6mapRfsNc4hwcWmP3QH",
       articles: [],
-
+      sections: ['all', 'world', 'business', 'arts'],
       // https://api.nytimes.com/svc/news/v3/content/all/all.json?limit=500&api-key=[YOUR_API_KEY]
       // sections: [{
       //   ""
@@ -32,14 +33,15 @@ export default {
     };
   },
   methods: {
-    loadArticles() {
-      fetch(this.BASE_URL + `all/all.json?limit=500&api-key=` + this.apiKey)
+    loadArticles(section) {
+      fetch(this.BASE_URL + `all/${section}.json?limit=50&api-key=` + this.apiKey)
       .then(response => response.json())
       .then(data => {
         this.articles = data.results;
         console.log(this.articles);
       })
       .catch(err => console.log(err));
+      scroll(0,0);
     },
     formatDate(timestamp) {
       let day = timestamp.split('T')[0];
@@ -51,7 +53,7 @@ export default {
     },
   },
   created: function() {
-    this.loadArticles();
+    this.loadArticles('all');
   }
 }
 </script>
