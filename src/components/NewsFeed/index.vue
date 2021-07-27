@@ -1,17 +1,20 @@
 <template>
-  <div id="news-feed" >
+  <div id="news-feed" class="sm:w-full md:w-4/5 my-0 mx-auto">
     <h1 class="text-center text-2xl py-4">newsFeed</h1>
-    <!-- <div v-for="story in this.articles" :key="story"> -->
-    <div v-for="(story, ind) in this.articles" :key="ind" class="shadow-lg rounded-lg bg-white gap-1.5 p-6 mb-4 sm:w-full md:w-1/2 xl:w-1/3 inline-block align-top">
-      <img class="pb-4 inline-block w-1/5 pt-1.5 align-top" :src=story.thumbnail_standard />
-      <div class="pl-2 inline-block w-4/5">
-        <p class="text-lg"><a :href="story.url" target="_blank">{{story.title}}</a></p>
-        <p class="text-sm py-2">{{formatDate(story.published_date)}}</p>
+      <div class="grid grid-flow-row sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div v-for="(story, ind) in this.articles" :key="ind" class=" shadow-lg rounded-lg bg-white gap-1.5 p-6 mb-4 align-top">
+          <div class="flex card-heading">
+            <img class="flex-none pb-4 pt-1.5 align-top max-h-24" :src=story.thumbnail_standard />
+            <div class="flex-1 pl-2">
+              <p class="text-lg"><a :href="story.url" target="_blank">{{story.title}}</a></p>
+              <p class="text-sm py-2">{{formatDate(story.published_date)}}</p>
+            </div>
+          </div>
+          <p v-if="story.abstract">{{story.abstract}}</p>
+          <p v-else><b>Abstract not available, click link above to see story</b></p>
+        </div>
       </div>
-      <p class>{{story.abstract}}</p>
-    </div>
     <div id="footer" class="sticky bottom-0 bg-white">
-      <!-- <a v-for="{section, action} in sections" @click="action">{{section}}</a> -->
       <button v-for="(section, i) in sections" :key="i" @click="loadArticles(section)" class="inline-block w-1/4 py-4">{{section}}</button>
     </div>
   </div>
@@ -60,21 +63,6 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-#news-feed {
-  margin: 0 auto;
-  width: 80%;
-}
-h3 {
-  margin: 40px 0 0;
-}
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
 a {
   color: #42b983;
 }
