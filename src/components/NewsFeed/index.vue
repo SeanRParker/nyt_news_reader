@@ -4,7 +4,8 @@
       <div class="grid grid-flow-row sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         <div v-for="(story, ind) in this.articles" :key="ind" class=" shadow-lg rounded-lg bg-white gap-1.5 p-6 mb-4 align-top">
           <div class="flex card-heading">
-            <img class="flex-none pb-4 pt-1.5 align-top max-h-24" :src=story.thumbnail_standard />
+            <img v-if="story.thumbnail_standard" class="flex-none pb-4 pt-1.5 align-top max-h-24" :src=story.thumbnail_standard />
+            <img v-else class="flex-none pb-4 pt-1.5 align-top max-h-24" src="../../assets/article-icon.png" />
             <div class="flex-1 pl-2">
               <p class="text-lg"><a :href="story.url" target="_blank">{{story.title}}</a></p>
               <p class="text-sm py-2">{{formatDate(story.published_date)}}</p>
